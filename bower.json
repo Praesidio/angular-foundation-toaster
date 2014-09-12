@@ -1,9 +1,8 @@
 {
-  "name": "AngularJS-Toaster",
-  "version": "0.4.7",
+  "name": "angular-foundation-toaster",
+  "version": "0.0.1",
   "main": [
-    "toaster.js",
-    "toaster.css"
+    "toaster.js"
   ],
   "ignore": [
     "**/.*",
@@ -12,6 +11,7 @@
   ],
   "dependencies": {
     "angular": ">1.2.6",
-    "angular-animate": "~1.2.8"
+    "angular-animate": "~1.2.8",
+    "font-awesome": "~4.1.0"
   }
 }
