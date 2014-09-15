@@ -1,26 +1,24 @@
-AngularJS-Toaster
+angular-foundation-toaster
 =================
 
-**AngularJS Toaster** is a AngularJS port of the **toastr** non-blocking notification jQuery library. It requires AngularJS v1.2.6 or higher and angular-animate for the CSS3 transformations. 
-(I would suggest to use /1.2.8/angular-animate.js, there is a weird blinking in newer versions.)
+**Angular Foundation Toaster** is a AngularJS port of the **toastr** non-blocking notification jQuery library using **Foundation** styles and **Font-Awesome** icons. It requires AngularJS v1.2.6 or higher, Zurb/Foundation and Font-Awesome. 
 
-### Current Version 0.4.7
+### Current Version 0.0.1
 
-## Demo
-- Simple demo is at http://plnkr.co/edit/4qpHwp or http://plnkr.co/edit/lzYaZt (with version 0.4.5)
-- Older version with Angular 1.2.0 is placed at http://plnkr.co/edit/mejR4h
-- Older version with Angular 1.2.0-rc.2 is placed at http://plnkr.co/edit/iaC2NY
-- Older version with Angular 1.1.5 is placed at http://plnkr.co/mVR4P4
+## Prerequisites
+
+1. An angular app
+
+2. Zurb/Foundation
+
+3. A build that recognizes bower components
 
 ## Getting started
 
-1. Link scripts:
+1. Install the module:
 
-```html
-<link href="http://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.4/toaster.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js" ></script>
-<script src="http://code.angularjs.org/1.2.0/angular-animate.min.js" ></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.4/toaster.js"></script>
+```
+bower install praesidio/angular-foundation-toaster
 ```
 
 2. Add toaster container directive: `<toaster-container></toaster-container>`
@@ -31,8 +29,16 @@ AngularJS-Toaster
 	// Display an info toast with no title
 	angular.module('main', ['toaster'])
 	.controller('myController', function($scope, toaster) {
-	    $scope.pop = function(){
-	        toaster.pop('success', "title", "text");
+	    $scope.info = function(){
+	        toaster.pop("title", "text");
+	    };
+	});
+
+	// Display an alert toast with no title
+	angular.module('main', ['toaster'])
+	.controller('myController', function($scope, toaster) {
+	    $scope.alert = function(){
+	        toaster.pop("title", "text", {type: 'alert'});
 	    };
 	});
 ```
@@ -41,7 +47,8 @@ AngularJS-Toaster
 
 ```html
 <div ng-controller="myController">
-    <button ng-click="pop()">Show a Toaster</button>
+    <button ng-click="info()">Show Info</button>
+    <button ng-click="alert()">Show Alert</button>
 </div>
 ```
 
@@ -49,21 +56,20 @@ AngularJS-Toaster
 
 ```html
 // Change display position
-<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+<toaster-container toaster-options="{'container-class': 'left'}"></toaster-container>
 ```
 
 ### Animations
-Unlike toastr, this library relies on ngAnimate and CSS3 transformations for animations.
+This library uses jqLite and CSS3 animations.  So far only a 'leave' anination is supported, and can be specified by simply specifying your own @keyframes style animation class in the toaster-options as 'leave-class'.
 		
 ## Author
-**Jiri Kavulak**
+**Brandon Smith**
 
 ## Credits
-Inspired by http://codeseven.github.io/toastr/demo.html.
+Forked from AngularJS-Toaster by Jiri Kavulak which was inspired by http://codeseven.github.io/toastr/demo.html.
 
 ## Copyright
-Copyright © 2013 [Jiri Kavulak](https://twitter.com/jirikavi).
+Copyright © 2014 [Brandon Smith](mailto:brandon@praesid.io).
 
 ## License 
-AngularJS-Toaster is under MIT license - http://www.opensource.org/licenses/mit-license.php
-
+angular-foundation-toaster is under MIT license - http://www.opensource.org/licenses/mit-license.php
