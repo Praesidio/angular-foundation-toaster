@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "angular": ">1.2.6",
-    "angular-animate": "~1.2.8",
+    "foundation": "zurb/foundation#5.4.2",
     "font-awesome": "~4.1.0"
   }
 }

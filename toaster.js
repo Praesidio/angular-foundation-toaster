@@ -141,6 +141,25 @@ angular.module('toaster', [])
             scope.configureTimer();
         },
         controller: ['$scope', '$log', function($scope, $log) {
+            var animationEndEvent = null; // use this to check for support and trigger fallback
+
+            // feature detect which vendor prefix is used
+            (function getAnimationEventName() {
+                var testEl = document.createElement('div'),
+                    transEndEventNames = {
+                        'WebkitAnimation': 'webkitAnimationEnd',
+                        'MozAnimation': 'animationend',
+                        'OAnimation': 'oAnimationEnd oanimationend',
+                        'msAnimation': 'MSAnimationEnd',
+                        'animation': 'animationend'
+                    };
+                for (var i in transEndEventNames) {
+                    if (transEndEventNames.hasOwnProperty(i) && testEl.style[i] !== undefined) {
+                        return animationEndEvent = transEndEventNames[i];
+                    }
+                }
+            })();
+
             function callHandler(handlerName) {
                 var handler = $scope.toast[handlerName];
                 if (handler && angular.isFunction($scope.$parent.$parent.$eval(handler))) {
@@ -163,7 +182,7 @@ angular.module('toaster', [])
                     toast.timer = $timeout(function () {
                         if ($scope.config.leaveClass) {
                             var element = angular.element($scope.element);
-                            element.addClass($scope.config.leaveClass).one('animationend', function(event) {
+                            element.addClass($scope.config.leaveClass).one(animationEndEvent, function(event) {
                                 $scope.removeToast();
                                 element.remove();
                             });
@@ -176,7 +195,7 @@ angular.module('toaster', [])
 
             $scope.onHover = function () {
                 if ($scope.config.leaveClass) {
-                    angular.element($scope.element).removeClass($scope.config.leaveClass).unbind('animationend');
+                    angular.element($scope.element).removeClass($scope.config.leaveClass).unbind(animationEndEvent);
                 }
                 if ($scope.toast.timer) {
                     $timeout.cancel($scope.toast.timer);
