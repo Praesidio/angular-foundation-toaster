@@ -47,8 +47,8 @@ angular.module('toaster', [])
 })
 .constant('toasterConfig', {
     'limit': 0,                   // limits max number of toasts 
-    'tap-to-dismiss': true,
-    'close-button': false,
+    'tap-to-dismiss': false,
+    'close-button': true,
     'newest-on-top': true,
     'icon-fa-classes': {
         success: 'fa-check',
