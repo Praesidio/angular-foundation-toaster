@@ -213,7 +213,7 @@ angular.module('toaster', [])
             };
 
             $scope.click = function () {
-                if ($scope.config.tap === true) {
+                if ($scope.toast.clickHandler || $scope.config.tap === true) {
                     if (callHandler('clickHandler')) {
                         $scope.removeToast();
                     }
